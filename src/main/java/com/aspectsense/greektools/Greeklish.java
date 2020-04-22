@@ -11,7 +11,8 @@ import java.util.StringTokenizer;
  * @see <a href="https://en.wikipedia.org/wiki/ISO_843#1997_edition">ISO 843 on Wikipedia</a>
  * @see <a href="http://www.geonoma.gov.cy/index.php/typopoiisi/metagrafi-ellnikou-alfavitou">
  *     Metagrafi ellinikou alfavitou</a>
- * @author Nearchos
+ *
+ * @author Nearchos Paspallis
  * Created: 29-Mar-20
  */
 public class Greeklish {
@@ -185,10 +186,27 @@ public class Greeklish {
         return ALL_GREEK_VOWELS.indexOf(c) != -1 || NOTE_1_GREEK_CONSONANTS.indexOf(c) != -1;
     }
 
+    /**
+     * Converts a text given in Greek into Greeklish (i.e. the equivalent text expressed in the Latin character set).
+     * It ignores accents, i.e. "Κόσμος" is converted to "Kosmos".
+     *
+     * @param greek the original text, expressed in the Greek character set
+     * @return the converted text, expressed in the Latin character set
+     * @see #toGreeklish(String, boolean)
+     */
     public static String toGreeklish(final String greek) {
         return toGreeklish(greek, false);
     }
 
+    /**
+     * Converts a text given in Greek into Greeklish (i.e. the equivalent text expressed in the Latin character set).
+     * If withAccents is set to true, it converts accents as well, i.e. "Κόσμος" is converted to "Kósmos".
+     *
+     * @see #toGreeklish(String)
+     *
+     * @param greek the original text, expressed in the Greek character set
+     * @return the converted text, expressed in the Latin character set
+     */
     public static String toGreeklish(final String greek, final boolean withAccents) {
         final StringBuilder stringBuilder = new StringBuilder();
         final StringTokenizer stringTokenizer = new StringTokenizer(greek, " ");
@@ -199,6 +217,15 @@ public class Greeklish {
         return stringBuilder.toString().trim();
     }
 
+    /**
+     * Converts a word given in Greek into Greeklish (i.e. the equivalent word expressed in the Latin character set).
+     * If withAccents is set to true, it converts accents as well, i.e. "Κόσμος" is converted to "Kósmos".
+     *
+     * @see #toGreeklish(String)
+     *
+     * @param greekWord the original word, expressed in the Greek character set
+     * @return the converted text, expressed in the Latin character set
+     */
     public static String toGreeklishWord(final String greekWord, final boolean withAccent) {
         String greeklishWord = greekWord;
         // handle words starting with ΜΠ, Μπ, μπ
@@ -285,6 +312,12 @@ public class Greeklish {
         return greeklishWord;
     }
 
+    /**
+     * Checks if a given Greek word is in all-capital letters.
+     *
+     * @param greekWord must be a Greek word
+     * @return true if and only if a given Greek word is in all-capital letters
+     */
     public static boolean isGreekWordInAllCaps(final String greekWord) {
         final char [] characters = greekWord.toCharArray();
         for(final char c : characters) {
@@ -327,6 +360,15 @@ public class Greeklish {
         ACCENTS_TO_PLAIN_GREEK.putAll(ACCENTS_TO_PLAIN_GREEK_UPPERCASE);
     }
 
+    /**
+     * Converts a given lower-case text in Greek, into the equivalent, simplified version where accents are removed.
+     * For example, "κόσμος" is converted to "κοσμος".
+     *
+     * This can be useful when you are searching in text.
+     *
+     * @param greekLowercaseTextWithAccents the lower-case text in Greek, which includes accents
+     * @return the equivalent text in Greek, without accents
+     */
     public static String removeAccentsLowercase(final String greekLowercaseTextWithAccents) {
         final StringBuilder greekLowercaseTextWithoutAccents = new StringBuilder();
         for(final char c : greekLowercaseTextWithAccents.toCharArray()) {
@@ -336,6 +378,15 @@ public class Greeklish {
         return greekLowercaseTextWithoutAccents.toString();
     }
 
+    /**
+     * Converts a given upper-case text in Greek, into the equivalent, simplified version where accents are removed.
+     * For example, "ΈΝΑΣ ΚΌΣΜΟΣ" is converted to "ΕΝΑΣ ΚΟΣΜΟΣ".
+     *
+     * This can be useful when you are searching in text.
+     *
+     * @param greekUppercaseTextWithAccents the upper-case text in Greek, which includes accents
+     * @return the equivalent text in Greek, without accents
+     */
     public static String removeAccentsUppercase(final String greekUppercaseTextWithAccents) {
         final StringBuilder greekUppercaseTextWithoutAccents = new StringBuilder();
         for(final char c : greekUppercaseTextWithAccents.toCharArray()) {
@@ -345,6 +396,15 @@ public class Greeklish {
         return greekUppercaseTextWithoutAccents.toString();
     }
 
+    /**
+     * Converts a given any-case text in Greek, into the equivalent, simplified version where accents are removed.
+     * For example, "Ένας Κόσμος" is converted to "Ενας Κοσμος".
+     *
+     * This can be useful when you are searching in text.
+     *
+     * @param greekTextWithAccents the any-case text in Greek, which includes accents
+     * @return the equivalent text in Greek, without accents
+     */
     public static String removeAccents(final String greekTextWithAccents) {
         final StringBuilder greekTextWithoutAccents = new StringBuilder();
         for(final char c : greekTextWithAccents.toCharArray()) {
@@ -354,6 +414,12 @@ public class Greeklish {
         return greekTextWithoutAccents.toString();
     }
 
+    /**
+     * Simply checks if the given text contains at least one character from the Greek character set.
+     *
+     * @param text the text to be checked
+     * @return true if and only if the given text contains at least one character from the Greek character set
+     */
     public static boolean containsGreek(final String text) {
         for(final char c : text.toCharArray()) {
             if(ALL_GREEK_LETTERS.indexOf(c) > -1) return true;

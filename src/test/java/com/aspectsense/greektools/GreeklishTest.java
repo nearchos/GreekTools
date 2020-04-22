@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Nearchos
+ * Testing various functionalities of the library.
+ *
+ * @author Nearchos Paspallis
  * Created: 29-Mar-20
  */
 public class GreeklishTest {
