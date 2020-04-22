@@ -205,6 +205,7 @@ public class Greeklish {
      * @see #toGreeklish(String)
      *
      * @param greek the original text, expressed in the Greek character set
+     * @param withAccents indicates whether the resulting text will have accents
      * @return the converted text, expressed in the Latin character set
      */
     public static String toGreeklish(final String greek, final boolean withAccents) {
@@ -224,9 +225,10 @@ public class Greeklish {
      * @see #toGreeklish(String)
      *
      * @param greekWord the original word, expressed in the Greek character set
+     * @param withAccents indicates whether the resulting text will have accents
      * @return the converted text, expressed in the Latin character set
      */
-    public static String toGreeklishWord(final String greekWord, final boolean withAccent) {
+    public static String toGreeklishWord(final String greekWord, final boolean withAccents) {
         String greeklishWord = greekWord;
         // handle words starting with ΜΠ, Μπ, μπ
         {
@@ -235,7 +237,7 @@ public class Greeklish {
             else if(greeklishWord.startsWith("μπ")) greeklishWord = greeklishWord.replace("μπ", "b");
         }
         // first handle exceptional cases under notes 1, 2 - with accents ...
-        if(withAccent) {
+        if(withAccents) {
             final Set<String> exceptionKeys = exceptionsWithAccentsNotes_1_2.keySet();
             for(final String exceptionKey : exceptionKeys) {
                 final String [] exceptionValues = exceptionsWithAccentsNotes_1_2.get(exceptionKey);
@@ -263,7 +265,7 @@ public class Greeklish {
             }
         }
         // next handle exceptional cases - with accents ...
-        if(withAccent) {
+        if(withAccents) {
             final Set<String> exceptionKeys = exceptionsWithAccents.keySet();
             for(final String exceptionKey : exceptionKeys) {
                 final String exceptionValue = exceptionsWithAccents.get(exceptionKey);
@@ -291,7 +293,7 @@ public class Greeklish {
             }
         }
         // finally handle all other letters - with accents ...
-        if(withAccent) {
+        if(withAccents) {
             final Set<String> mappingKeys = mappingWithAccents.keySet();
             for(final String mappingKey : mappingKeys) {
                 final String mappingValue = mappingWithAccents.get(mappingKey);
