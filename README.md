@@ -4,6 +4,11 @@
 
 A Java library for manipulating Greek text - mainly transforming between Latin and Greek character sets.
 
+Based on the [ISO 843](https://en.wikipedia.org/wiki/ISO_843) standard (which is identical to [ELOT 743](http://www.geonoma.gov.cy/myfiles/logismika/elot/pinakas-metagrafis-ellnikikou-alfavitou-sm.jpg)).
+
+It can be used to transform Greek text to the equivalent using the Latin alphabet (aka Greeklish).
+The other way also works, assuming the source text is consistent with the above standards.
+
 Navigate the JavaDoc comments in the Greeklish class for the available methods.
 
 [**Greeklish.java**](https://github.com/nearchos/GreekTools/blob/master/src/main/java/com/aspectsense/greektools/Greeklish.java)
