@@ -30,6 +30,6 @@ Also, update your module Gradle to add the dependency:
 
 ```gradle
 dependencies {
-  implementation 'com.github.nearchos:GreekTools:0.1.1'
+  implementation 'com.github.nearchos:GreekTools:0.1.2'
 }
 ```

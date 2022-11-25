@@ -123,6 +123,7 @@ public class Greeklish {
         mappingWithAccents.put("ω", "ō");
         mappingWithAccents.put("ώ", "ṓ");
 
+        // e.g. av "before vowels or voiced consonants" and af "before voiceless consonants and word-finally"
         exceptionsNotes_1_2.put("ΑΥ", new String [] {"AV", "AF"});
         exceptionsNotes_1_2.put("Αυ", new String [] {"Av", "Af"});
         exceptionsNotes_1_2.put("αυ", new String [] {"av", "af"});
@@ -159,6 +160,7 @@ public class Greeklish {
         exceptions.put("Ντ", "Nt");
         exceptions.put("ντ", "nt");
 
+        // e.g. áv "before vowels or voiced consonants" and áf "before voiceless consonants and word-finally"
         exceptionsWithAccentsNotes_1_2.put("ΑΎ", new String [] {"ÁV", "ÁF"});
         exceptionsWithAccentsNotes_1_2.put("Αύ", new String [] {"Áv", "Áf"});
         exceptionsWithAccentsNotes_1_2.put("αύ", new String [] {"áv", "áf"});
@@ -229,6 +231,10 @@ public class Greeklish {
      * @return the converted text, expressed in the Latin character set
      */
     public static String toGreeklishWord(final String greekWord, final boolean withAccents) {
+        // handle words that match any of the exceptions
+        if(withAccents && exceptionsWithAccentsNotes_1_2.containsKey(greekWord)) return exceptionsWithAccentsNotes_1_2.get(greekWord)[0];
+        if(exceptionsNotes_1_2.containsKey(greekWord)) return exceptionsNotes_1_2.get(greekWord)[0];
+
         String greeklishWord = greekWord;
         // handle words starting with ΜΠ, Μπ, μπ
         {
@@ -236,7 +242,7 @@ public class Greeklish {
             else if(greeklishWord.startsWith("Μπ")) greeklishWord = greeklishWord.replace("Μπ", "B");
             else if(greeklishWord.startsWith("μπ")) greeklishWord = greeklishWord.replace("μπ", "b");
         }
-        // first handle exceptional cases under notes 1, 2 - with accents ...
+        // handle exceptional cases under notes 1, 2 - with accents ...
         if(withAccents) {
             final Set<String> exceptionKeys = exceptionsWithAccentsNotes_1_2.keySet();
             for(final String exceptionKey : exceptionKeys) {
@@ -258,7 +264,7 @@ public class Greeklish {
                 assert exceptionValues != null;
                 int index;
                 while((index = greeklishWord.indexOf(exceptionKey)) != -1) {
-                    final boolean endOfWord = index == greeklishWord.length() - exceptionKey.length() - 1;
+                    final boolean endOfWord = greeklishWord.length() == exceptionKey.length() || index == greeklishWord.length() - exceptionKey.length() - 1;
                     final boolean note1 = !endOfWord && checkNote1(greeklishWord.charAt(index + exceptionKey.length()));
                     greeklishWord = greeklishWord.replaceAll(exceptionKey, note1 ? exceptionValues[0] : exceptionValues[1]);
                 }

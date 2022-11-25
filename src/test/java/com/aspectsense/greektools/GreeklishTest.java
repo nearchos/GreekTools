@@ -41,6 +41,14 @@ public class GreeklishTest {
             "ΕΥΘΕΊΑ",
             "Ευθεία",
             "Αυτή είναι μια δοκιμαστική πρόταση. Είναι καλή;",
+            "αυ",
+            "ευ",
+            "αύ",
+            "εύ",
+            "Αυ",
+            "Ευ",
+            "ΑΥ",
+            "ΕΥ",
     };
 
     private static final String [] EXPECTED_GREEKLISH_WORDS_SIMPLIFIED = {
@@ -71,6 +79,14 @@ public class GreeklishTest {
             "EFTHEIA",
             "Eftheia",
             "Afti einai mia dokimastiki protasi. Einai kali?",
+            "av",
+            "ev",
+            "av",
+            "ev",
+            "Av",
+            "Ev",
+            "AV",
+            "EV",
     };
 
     private static final String [] EXPECTED_GREEKLISH_WORDS_WITH_ACCENTS = {
@@ -101,6 +117,14 @@ public class GreeklishTest {
             "EFTHEÍA",
             "Eftheía",
             "Aftī́ eínai mia dokimastikī́ prótasī. Eínai kalī́?",
+            "av",
+            "ev",
+            "áv",
+            "év",
+            "Av",
+            "Ev",
+            "AV",
+            "EV",
     };
 
     @Test
@@ -110,7 +134,7 @@ public class GreeklishTest {
             final String greekWord = GREEK_WORDS[i];
             final String greeklishWord = Greeklish.toGreeklish(greekWord);
             final boolean match = greeklishWord.equals(EXPECTED_GREEKLISH_WORDS_SIMPLIFIED[i]);
-            System.out.println(greekWord + " -> " + greeklishWord + " [" + EXPECTED_GREEKLISH_WORDS_SIMPLIFIED[i] + "] " + (match ? "✓" : "✗"));
+            System.out.println(greekWord + " -> " + greeklishWord + " [" + EXPECTED_GREEKLISH_WORDS_SIMPLIFIED[i] + "] " + (match ? "OK" : "ERROR"));
             succeed &= match;
         }
         assert succeed;
@@ -123,7 +147,7 @@ public class GreeklishTest {
             final String greekWord = GREEK_WORDS[i];
             final String greeklishWord = Greeklish.toGreeklish(greekWord, true);
             final boolean match = greeklishWord.equals(EXPECTED_GREEKLISH_WORDS_WITH_ACCENTS[i]);
-            System.out.println(greekWord + " -> " + greeklishWord + " [" + EXPECTED_GREEKLISH_WORDS_WITH_ACCENTS[i] + "] " + (match ? "✓" : "✗"));
+            System.out.println(greekWord + " -> " + greeklishWord + " [" + EXPECTED_GREEKLISH_WORDS_WITH_ACCENTS[i] + "] " + (match ? "OK" : "ERROR"));
             succeed &= match;
         }
         assert succeed;
