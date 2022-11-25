@@ -33,3 +33,7 @@ dependencies {
   implementation 'com.github.nearchos:GreekTools:0.1.2'
 }
 ```
+
+### Versions
+- 0.1.1 - first public release
+- 0.1.2 - minor fix related to a bug that failed the processing when the input was one of the words in exceptions notes 1/2 (related to [issue #1](https://github.com/nearchos/GreekTools/issues/1))
